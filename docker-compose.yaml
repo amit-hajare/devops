@@ -7,4 +7,4 @@ services:
     ports:
       - "8080-8085:8080"
     volumes:
-      - "/mnt/docker-wars/gameoflife/gameoflife-web/target:/usr/local/tomcat/webapps"
+      - "/mnt/docker-wars/game-of-life/gameoflife-web/target:/usr/local/tomcat/webapps"
