@@ -1,0 +1,10 @@
+version: '3'
+services:
+  service_one:
+    build:
+      context: .
+    image: tomcat:9
+    ports:
+      - "8080-8085:8080"
+    volumes:
+      - "/mnt/docker-wars:/usr/local/tomcat/webapps"

@@ -1,0 +1,20 @@
+--- #deploymentoncontainer
+- hosts: Dev, QA
+  user: service
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  
+  vars:
+    pkgdock: docker
+    pkgname: java-1.8.0-openjdk-devel.x86_64
+    war_path: /mnt/docker-wars/
+  tasks:
+    - name: install java
+      action: yum pkg="{{pkgname}}" state=present
+    - name: install docker
+      action: yum pkg="{{pkgdock}}" state=present
+    - name: start docker
+      action: service name="{{pkgdock}}" state=started
+    - name: copy-war
+      action: copy src=gameoflife.war dest="{{war_path}}"
