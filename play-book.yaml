@@ -1,20 +1,18 @@
---- #deploymentoncontainer
 - hosts: Dev, QA
   user: service
   become: yes
   connection: ssh
   gather_facts: yes
-  
-  vars:
-    pkgdock: docker
-    pkgname: java-1.8.0-openjdk-devel.x86_64
-    war_path: /mnt/docker-wars/
+
   tasks:
-    - name: install java
-      action: yum pkg="{{pkgname}}" state=present
+    - name: cloning Dockerfile and docker-compose.yaml file
+      command: git clone https://github.com/aakashchavhan/devops.git
+
     - name: install docker
-      action: yum pkg="{{pkgdock}}" state=present
+      command: yum install docker -y
+
     - name: start docker
-      action: service name="{{pkgdock}}" state=started
-    - name: copy-war
-      action: copy src=gameoflife.war dest="{{war_path}}"
+      command: systemctl start docker
+
+    - name: run docker-compose file
+      command: docker-compose up -d
