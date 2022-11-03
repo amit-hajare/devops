@@ -1,5 +1,6 @@
-FROM tomcat 9.0.68-jre8-temurin-jammy
+FROM tomcat:9
 MAINTAINER aakash_90
-COPY gameoflife.war /usr/local/tomcat/webapps/
+WORKDIR /usr/local/tomcat/webapps/
+RUN rm -rf /usr/local/tomcat/webapps/*
 EXPOSE 8080
-ENTRYPOINT ["catalina.sh","run"]
+CMD ["catalina.sh","run"]
