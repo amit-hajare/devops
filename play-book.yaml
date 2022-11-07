@@ -1,3 +1,5 @@
+--- #deployemnet play-book
+
 - hosts: Dev, QA
   user: service
   become: yes
@@ -5,17 +7,14 @@
   gather_facts: yes
 
   tasks:
-    - name: cloning Dockerfile and docker-compose.yaml file
-      command: git clone https://github.com/aakashchavhan/devops.git
+    - name: Copy a directory to a remote machine
+      copy: src=/mnt/project/ dest=/home/service
 
     - name: install docker
       command: yum install docker -y
 
     - name: start docker
       command: systemctl start docker
-
-    - name: copy compose file
-      command: sudo mv docker-compose.yaml Dockerfile /home/service/
 
     - name: run docker-compose file
       command: docker-compose up -d
