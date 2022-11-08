@@ -7,4 +7,4 @@ services:
     ports:
       - "8080-8085:8080"
     volumes:
-      - "/mnt/project:/usr/local/tomcat/webapps"
+      - "/mnt/FinalAssignment/project:/usr/local/tomcat/webapps"
