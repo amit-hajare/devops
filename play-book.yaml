@@ -8,7 +8,7 @@
 
   tasks:
     - name: Copy a directory to a remote machine
-      copy: src=/mnt/project/ dest=/home/service
+      copy: src=/mnt/FinalAssignment/project/ dest=/home/service
 
     - name: install docker
       command: yum install docker -y
