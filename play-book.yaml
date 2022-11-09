@@ -1,14 +1,14 @@
 --- #deployemnet play-book
 
-- hosts: Dev, QA
+- hosts: qa, dev
   user: service
-  become: yes
+  become: true
   connection: ssh
   gather_facts: yes
 
   tasks:
     - name: Copy a directory to a remote machine
-      copy: src=/mnt/FinalAssignment/project/ dest=/home/service
+      copy: src=/mnt/project/ dest=/home/service
 
     - name: install docker
       command: yum install docker -y
@@ -16,5 +16,11 @@
     - name: start docker
       command: systemctl start docker
 
+    - name: stopping the existing containers
+      command: docker-compose down
+
+    - name: Removing existing images
+      command: docker system prune -af
+
     - name: run docker-compose file
-      command: docker-compose up -d
+      command: sudo docker-compose up -d
